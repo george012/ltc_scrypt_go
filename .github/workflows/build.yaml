@@ -43,9 +43,16 @@ jobs:
           sudo apt update
           sudo apt install openssl libssl-dev
 
-      - name: Downgrade MinGW
+      - name: Install MSYS2 using choco
         if: matrix.os == 'windows-latest'
-        run: choco install mingw --allow-downgrade
+        run: choco install msys2 --params "/InstallDir=C:\msys64"
+
+      - name: Setup MSYS2 and install dependencies
+        if: matrix.os == 'windows-latest'
+        run: |
+          C:\msys64\usr\bin\bash -lc "pacman -Sy --noconfirm && pacman -S --noconfirm base-devel mingw-w64-x86_64-toolchain mingw-w64-x86_64-cmake mingw-w64-x86_64-openssl"
+          echo "C:\\msys64\\mingw64\\bin" >> $GITHUB_ENV
+          echo "C:\\msys64\\usr\\bin" >> $GITHUB_ENV
 
       - name: Set up Go
         uses: actions/setup-go@v5
