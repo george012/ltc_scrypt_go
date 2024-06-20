@@ -7,6 +7,7 @@ env:
   ProductName: ltc_scrypt_go
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*'
@@ -15,7 +16,7 @@ jobs:
   Testing:
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         arch: [amd64, arm64]
         exclude:
           - os: windows-latest
@@ -25,6 +26,21 @@ jobs:
     steps:
       - name: CheckOut
         uses: actions/checkout@v4
+
+      - name: install MacOS dependencies
+        if: matrix.os == 'macos-latest'
+        run: |
+          brew install tree zip unzip FiloSottile/musl-cross/musl-cross mingw-w64 openssl
+
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install openssl libssl-dev
+
+      - name: Downgrade MinGW
+        if: matrix.os == 'windows-latest'
+        run: choco install mingw --allow-downgrade
 
       - name: Set up Go
         uses: actions/setup-go@v5
