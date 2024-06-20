@@ -21,7 +21,7 @@ package ltc_scrypt_go
 
 #cgo windows,amd64 CFLAGS: -I${SRCDIR}/lib/windows -I${SRCDIR}/lib/include
 #cgo windows,amd64 CPPFLAGS: -I${SRCDIR}/lib/windows -I${SRCDIR}/lib/include
-#cgo windows,amd64 LDFLAGS: ${SRCDIR}/lib/windows/libscrypt.a C:/msys64/mingw64/lib/libssl.a C:/msys64/mingw64/lib/libcrypto.a
+#cgo windows,amd64 LDFLAGS: ${SRCDIR}/lib/windows/libscrypt.a /mingw64/lib/libssl.a /mingw64/lib/libcrypto.a
 
 #cgo windows,arm64 CFLAGS: -I${SRCDIR}/lib/windows -I${SRCDIR}/lib/include
 #cgo windows,arm64 CPPFLAGS: -I${SRCDIR}/lib/windows -I${SRCDIR}/lib/include
