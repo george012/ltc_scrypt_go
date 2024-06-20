@@ -5,6 +5,6 @@ package ltc_scrypt_go
 /*
 #cgo linux,arm64 CFLAGS: -I${SRCDIR}/lib/linux -I${SRCDIR}/lib/include
 #cgo linux,arm64 CPPFLAGS: -I${SRCDIR}/lib/linux -I${SRCDIR}/lib/include
-#cgo linux,arm64 LDFLAGS: ${SRCDIR}/lib/linux/libscrypt_arm64.a -lssl -lcrypto
+#cgo linux,arm64 LDFLAGS: ${SRCDIR}/lib/linux/libscrypt_arm64.a ${OPENSSL_LIBRARIES}/libssl.a ${OPENSSL_LIBRARIES}/libcrypto.a
 */
 import "C"
