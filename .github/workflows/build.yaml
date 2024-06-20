@@ -35,6 +35,11 @@ jobs:
           echo "OPENSSL_LIBRARIES=$(brew --prefix openssl)/lib" >> $GITHUB_ENV
           echo "OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include" >> $GITHUB_ENV
           echo "PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
+          echo 'export OPENSSL_ROOT_DIR=$(brew --prefix openssl)' >> $HOME/.bash_profile
+          echo 'export OPENSSL_LIBRARIES=$OPENSSL_ROOT_DIR/lib' >> $HOME/.bash_profile
+          echo 'export OPENSSL_INCLUDE_DIR=$OPENSSL_ROOT_DIR/include' >> $HOME/.bash_profile
+          echo 'export PKG_CONFIG_PATH=$OPENSSL_ROOT_DIR/lib/pkgconfig:$PKG_CONFIG_PATH' >> $HOME/.bash_profile
+          source $HOME/.bash_profile
 
       - name: Install Linux dependencies
         if: matrix.os == 'ubuntu-latest'
