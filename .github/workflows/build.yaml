@@ -31,6 +31,10 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           brew install tree zip unzip FiloSottile/musl-cross/musl-cross mingw-w64 openssl
+          echo "OPENSSL_ROOT_DIR=$(brew --prefix openssl)" >> $GITHUB_ENV
+          echo "OPENSSL_LIBRARIES=$(brew --prefix openssl)/lib" >> $GITHUB_ENV
+          echo "OPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include" >> $GITHUB_ENV
+          echo "PKG_CONFIG_PATH=$(brew --prefix openssl)/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
 
       - name: Install Linux dependencies
         if: matrix.os == 'ubuntu-latest'
