@@ -5,16 +5,6 @@
 */
 package ltc_scrypt_go
 
-import "C"
-import (
-	"encoding/hex"
-	"sync"
-	"unsafe"
-)
-en: Input byte array; zh-CN: 输入的字节数组;
-*/
-package ltc_scrypt_go
-
 /*
 #include <stdlib.h>
 #include "scrypt.h"
@@ -59,9 +49,6 @@ func CalcScryptHash(bytesInput []byte) []byte {
 	@return en: Scrypt hash hexadecimal string; zh-CN: scrypt哈希十六进制字符串;
 */
 func CalcScryptHashHex(bytesInput []byte) string {
-	mutex.Lock()
-	defer mutex.Unlock()
-
 	bytesRet := CalcScryptHash(bytesInput)
 	return hex.EncodeToString(bytesRet)
 }
